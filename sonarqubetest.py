@@ -125,4 +125,83 @@ def outdated_library_usage():
 def improper_error_handling():
     try:
         return 1 / 0  # Division by zero
-    except 
+    except Exception as e:
+        print("Something went wrong!")  # Generic exception message, no details
+
+# Weak hash function
+def weak_hash_function(data):
+    return hashlib.sha1(data.encode()).hexdigest()  # SHA-1 is weak
+
+# Insecure use of SSL/TLS
+import ssl
+def insecure_ssl_connection():
+    context = ssl.create_default_context()
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE  # Insecure SSL/TLS usage, no certificate verification
+
+# Inefficient sorting algorithm
+def inefficient_sort(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr) - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]  # Inefficient sorting algorithm (Bubble Sort)
+
+# Failure to sanitize inputs (file name)
+def unsanitized_input(input_data):
+    print(f"Received input: {input_data}")  # No sanitization of input
+
+# Insecure use of subprocess
+import subprocess
+def insecure_subprocess():
+    subprocess.run("rm -rf /", shell=True)  # Dangerous command, potential for misuse
+
+# Use of deprecated functions
+import urllib
+def deprecated_function_usage():
+    urllib.urlopen('http://example.com')  # Deprecated function in Python 3.x
+
+# Memory leak (not releasing memory)
+def memory_leak():
+    data = []
+    while True:
+        data.append("Some data")  # Continually adding to the list, causing memory leak
+
+# Inefficient database query
+def inefficient_query():
+    query = "SELECT * FROM users WHERE age > 20"
+    result = execute_query(query)  # Inefficient query, should be optimized
+
+# Use of unsafe string formatting
+def unsafe_string_formatting():
+    user_input = "123"
+    print("Hello, %s" % user_input)  # Vulnerable to format string vulnerabilities
+
+if __name__ == "__main__":
+    # Example function calls to trigger vulnerabilities
+    insecure_password_storage("password")
+    run_command("rm -rf /")
+    xss_vulnerability("<script>alert('XSS')</script>")
+    sql_injection("' OR '1'='1")
+    insecure_file_upload("example.txt")
+    path_traversal("../../etc/passwd")
+    send_request()
+    insecure_random()
+    weak_password_check("12345")
+    unvalidated_redirect("http://malicious.com")
+    resource_leak()
+    unsafe_eval("__import__('os').system('rm -rf /')")
+    wrong_exception_handling()
+    input_validation("example.txt")
+    buffer_overflow()
+    outdated_library_usage()
+    improper_error_handling()
+    weak_hash_function("data")
+    insecure_ssl_connection()
+    inefficient_sort([5, 3, 8, 6, 7])
+    unsanitized_input("<script>")
+    insecure_subprocess()
+    deprecated_function_usage()
+    memory_leak()
+    inefficient_query()
+    unsafe_string_formatting()
+
